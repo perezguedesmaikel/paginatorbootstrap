@@ -2,7 +2,8 @@ import React from "react";
 
 function Contador() {
     return(
-        <nav aria-label="...">
+        <nav aria-label="..." className='d-flex'>
+            <label className='pt-2 me-2'>T-10</label>
             <ul className="pagination justify-content-end">
                 <li className="page-item disabled">
                     <a className="page-link" href="#" tabIndex="-1" aria-disabled="true">Previous</a>
