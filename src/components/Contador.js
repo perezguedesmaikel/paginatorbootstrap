@@ -1,11 +1,11 @@
 import React from "react";
 
-function Contador({total,Next,Previous}) {
+function Contador({total,Next,Previous,botondesabilitado}) {
     return(
         <nav aria-label="..." className='d-flex'>
             <label className='pt-2 me-2 fw-bold'>T-{total}</label>
             <ul className="pagination justify-content-end">
-                <li className="page-item disabled">
+                <li className={`page-item ${botondesabilitado?'disabled':''}`}>
                     <a className="page-link"  onClick={Previous}>Previous</a>
                 </li>
                 <li className="page-item"><a className="page-link" href="#">1</a></li>

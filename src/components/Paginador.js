@@ -8,6 +8,7 @@ let numitem=10;
 function Paginator() {
     const [totaldatos,setTotaldatos]=useState(datos_api);
     const [lista,setLista]=useState([...totaldatos].splice(0,numitem));
+    const [prevdesabilitado,setPrevdesabilitado]=useState(true);
     const [currentpage,setCurrentpage]=useState(0);
     function hadleonselect(e) {
         numitem=parseInt(e.target.value);
@@ -22,10 +23,14 @@ function Paginator() {
         if(firstindex>=totalelementos)return;
         setLista([...totaldatos].splice(firstindex,numitem));
         setCurrentpage(nexpage);
+        setPrevdesabilitado(false);
     }
     function Previous() {
         const prevPage=currentpage-1;
-        if(currentpage<=0)return;
+        if(currentpage<=0){
+            setPrevdesabilitado(true);
+            return;
+        }
         const firstindex=prevPage*numitem;
         setLista([...totaldatos].splice(firstindex,numitem))
         setCurrentpage(prevPage);
@@ -49,7 +54,7 @@ function Paginator() {
                     </tr>)}
                     </tbody>
             </table>
-           <Contador total={totaldatos.length} Next={Next} Previous={Previous}/>
+           <Contador total={totaldatos.length} Next={Next} Previous={Previous} botondesabilitado={prevdesabilitado}/>
 
         </div>
 
