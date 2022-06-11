@@ -15,6 +15,7 @@ function Paginator() {
       //console.log(parseInt(e.target.value));
         setLista([...totaldatos].splice(0,numitem));
         setCurrentpage(0);
+        setPrevdesabilitado(true);
     }
     function Next() {
         const totalelementos=totaldatos.length;
@@ -28,8 +29,10 @@ function Paginator() {
     function Previous() {
         const prevPage=currentpage-1;
         if(currentpage<=0){
-            setPrevdesabilitado(true);
             return;
+        }
+        if(prevPage<=0){
+            setPrevdesabilitado(true);
         }
         const firstindex=prevPage*numitem;
         setLista([...totaldatos].splice(firstindex,numitem))
