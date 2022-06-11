@@ -1,6 +1,6 @@
 import React from "react";
 
-function Contador({total,Next,Previous,botondesabilitado}) {
+function Contador({total,Next,Previous,botondesabilitado,nextdesabilitado}) {
     return(
         <nav aria-label="..." className='d-flex'>
             <label className='pt-2 me-2 fw-bold'>T-{total}</label>
@@ -15,7 +15,7 @@ function Contador({total,Next,Previous,botondesabilitado}) {
                 <li className="page-item"><a className="page-link" href="#">3</a></li>
                 <li className="page-item"><a className="page-link" href="#">4</a></li>
                 <li className="page-item"><a className="page-link" href="#">5</a></li>
-                <li className="page-item">
+                <li className={`page-item ${nextdesabilitado?'disabled':''}`}>
                     <a className="page-link"  onClick={Next}>Next</a>
                 </li>
             </ul>
