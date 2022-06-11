@@ -1,36 +1,34 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Contador from "./Contador";
 import Navbar from "./Navbar";
 const datos_api=Array.from({length:100},(value,index)=>{
   return{id:index,title:`Item #${index}`,email:'maikel@gmail.com'}
 });
-
+let numitem=10;
 function Paginator() {
     const [totaldatos,setTotaldatos]=useState(datos_api);
-    const numitem=10;
     const [lista,setLista]=useState([...totaldatos].splice(0,numitem));
+    const [currentpage,setCurrentpage]=useState(0);
     function hadleonselect(e) {
-        let numitem2=10;
-        if (e.target.value==='pre'){
-             numitem2=10;
-        }
-        if (e.target.value==='1'){
-             numitem2=25;
-        }
-        if (e.target.value==='2'){
-            numitem2=50;
-        }
-        if (e.target.value==='3'){
-            numitem2=100;
-        }
-        setLista([...totaldatos].splice(0,numitem2));
+        numitem=parseInt(e.target.value);
+      //console.log(parseInt(e.target.value));
+        setLista([...totaldatos].splice(0,numitem));
+        setCurrentpage(0);
     }
     function Next() {
         const totalelementos=totaldatos.length;
-        console.log(totalelementos);
+        const nexpage=currentpage+1;
+        const firstindex=nexpage*numitem;
+        if(firstindex>=totalelementos)return;
+        setLista([...totaldatos].splice(firstindex,numitem));
+        setCurrentpage(nexpage);
     }
     function Previous() {
-       console.log('Previous');
+        const prevPage=currentpage-1;
+        if(currentpage<=0)return;
+        const firstindex=prevPage*numitem;
+        setLista([...totaldatos].splice(firstindex,numitem))
+        setCurrentpage(prevPage);
     }
     return(
         <div className='container border'>
