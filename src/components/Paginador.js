@@ -20,7 +20,7 @@ function Paginator() {
     {
         totalpageint=totalpage.toFixed();
     }
-    let arreglototalpaginas=Array.from({length:totalpageint},(value,index)=>{
+    let arreglototalpaginas=Array.from({length:totalpageint-1},(value,index)=>{
         return{id:index}
     });
     function hadleonselect(e) {
@@ -57,6 +57,20 @@ function Paginator() {
         setNextdesabilitado(false);
 
     }
+    function handlingancla(val) {
+        setCurrentpage(val-1);
+        setLista([...totaldatos].splice((val-1)*numitem,numitem));
+        if(val===1){
+            setPrevdesabilitado(true);
+        }else{
+            setPrevdesabilitado(false);
+        }
+        if(val===totalpageint){
+            setNextdesabilitado(true)
+        }else{
+            setNextdesabilitado(false)
+        }
+    }
     return(
         <div className='container border'>
             <Navbar hadleonselect={hadleonselect}/>
@@ -84,7 +98,9 @@ function Paginator() {
                 </tfoot>
             </table>
            <Contador total={totalpageint} Next={Next} Previous={Previous} botondesabilitado={prevdesabilitado}
-                     nextdesabilitado={nextdesabilitado} arreglototalpaginas={arreglototalpaginas} currentpage={currentpage}/>
+                     nextdesabilitado={nextdesabilitado} arreglototalpaginas={arreglototalpaginas} currentpage={currentpage}
+           handlingancla={handlingancla}
+           />
 
         </div>
 
