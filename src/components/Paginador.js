@@ -18,14 +18,18 @@ function Paginator() {
         totalpageint=totalpage;
     }else
     {
-        totalpageint=totalpage.toFixed()+1;
+        totalpageint=totalpage.toFixed();
     }
+    let arreglototalpaginas=Array.from({length:totalpageint},(value,index)=>{
+        return{id:index}
+    });
     function hadleonselect(e) {
         numitem=parseInt(e.target.value);
       //console.log(parseInt(e.target.value));
         setLista([...totaldatos].splice(0,numitem));
         setCurrentpage(0);
         setPrevdesabilitado(true);
+        setNextdesabilitado(false);
     }
     function Next() {
         const totalelementos=totaldatos.length;
@@ -73,13 +77,14 @@ function Paginator() {
                     </tbody>
                 <tfoot className='table table-primary fw-bold'>
                 <tr>
-                    <td>id</td>
+                    <td>{totaldatos.length}</td>
                     <td>Email</td>
                     <td>Title</td>
                 </tr>
                 </tfoot>
             </table>
-           <Contador total={totaldatos.length} Next={Next} Previous={Previous} botondesabilitado={prevdesabilitado} nextdesabilitado={nextdesabilitado}/>
+           <Contador total={totalpageint} Next={Next} Previous={Previous} botondesabilitado={prevdesabilitado}
+                     nextdesabilitado={nextdesabilitado} arreglototalpaginas={arreglototalpaginas} currentpage={currentpage}/>
 
         </div>
 
