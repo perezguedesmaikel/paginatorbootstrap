@@ -12,24 +12,27 @@ function Paginator() {
     const [lista,setLista]=useState([]);
     const[tablausuario,setTablausuario]=useState([]);
     const[busqueda,setBusqueda]=useState('');
+    const [nextdesabilitado,setNextdesabilitado]=useState(false);
+    const [prevdesabilitado,setPrevdesabilitado]=useState(true);
+    const [currentpage,setCurrentpage]=useState(0);
     const peticionget= async ()=>{
         await axios.get('https://jsonplaceholder.typicode.com/users').then(response=>{
             setTotaldatos(response.data);
-            setLista([...totaldatos].splice(0,numitem));
+
         }).catch(error=>{
             console.log(error);
         });
     }
     useEffect(()=>{
         peticionget().then();
-    },[totaldatos]);
+
+    },[]);
     useEffect(()=>{
         setLista([...totaldatos].splice(0,numitem));
-    },[]);
+    },[totaldatos]);
     //const [totaldatos,setTotaldatos]=useState(datos_api);
-    const [prevdesabilitado,setPrevdesabilitado]=useState(true);
-    const [nextdesabilitado,setNextdesabilitado]=useState(false);
-    const [currentpage,setCurrentpage]=useState(0);
+
+
     let totalpage=totaldatos.length/numitem;
     let totalpageint=0;
     if (Number.isInteger(totalpage)){
@@ -41,6 +44,7 @@ function Paginator() {
     let arreglototalpaginas=Array.from({length:totalpageint-1},(value,index)=>{
         return{id:index}
     });
+
     function hadleonselect(e) {
         numitem=parseInt(e.target.value);
       //console.log(parseInt(e.target.value));
@@ -92,7 +96,7 @@ function Paginator() {
     return(
         <div className='container border'>
             <Navbar hadleonselect={hadleonselect}/>
-            <table className="table table table-striped table-bordered mb-1 mt-1 table-hover">
+            <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
                    <th>id</th>
@@ -102,11 +106,12 @@ function Paginator() {
                </thead>
                     <tbody>
                     {
-                        lista.map(item=><tr key={item.id}>
+
+                        lista.length>0?lista.map(item=><tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.email}</td>
                             <td>{item.name}</td>
-                        </tr>)
+                        </tr>):<tr><td>Cargando datos...</td></tr>
                     }
                     </tbody>
                 <tfoot className='table table-primary fw-bold'>

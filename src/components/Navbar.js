@@ -15,7 +15,6 @@ function Navbar({hadleonselect,val1}) {
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select><label className='m-2'>entries</label></form>
-
                 <form className="d-flex m-2 mb-1">
                     <input className="form-control m-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button className="btn btn-primary" type="submit">Search</button>
