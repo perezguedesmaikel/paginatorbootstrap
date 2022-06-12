@@ -1,5 +1,5 @@
 import React from "react";
-function Navbar({hadleonselect,input,buscar}) {
+function Navbar({hadleonselect,input}) {
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light bg-body">
             <div className="container-fluid">
@@ -15,7 +15,6 @@ function Navbar({hadleonselect,input,buscar}) {
                 </select><label className='m-2'>entries</label></form>
                 <form className="d-flex m-2 mb-1">
                     <input className="form-control m-2" type="search" placeholder="Search" aria-label="Search" onChange={input}/>
-                    <button className="btn btn-primary" type="submit" onClick={buscar}>Search</button>
                 </form>
 
             </div>

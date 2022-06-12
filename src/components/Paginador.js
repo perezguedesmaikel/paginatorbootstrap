@@ -11,13 +11,14 @@ function Paginator() {
     const[totaldatos,setTotaldatos]=useState([]);
     const [lista,setLista]=useState([]);
     const[tablausuario,setTablausuario]=useState([]);
-    const[busqueda,setBusqueda]=useState('');
+    const[guardarlista,setGuardarlista]=useState([]);
     const [nextdesabilitado,setNextdesabilitado]=useState(false);
     const [prevdesabilitado,setPrevdesabilitado]=useState(true);
     const [currentpage,setCurrentpage]=useState(0);
     const peticionget= async ()=>{
         await axios.get('https://jsonplaceholder.typicode.com/users').then(response=>{
             setTotaldatos(response.data);
+            setTablausuario(response.data);
 
         }).catch(error=>{
             console.log(error);
@@ -100,16 +101,35 @@ function Paginator() {
             setNextdesabilitado(false)
         }
     }
+    //arreglar este codigo
     function input(e) {
-        setBusqueda(e.target.value);
+        //setBusqueda(e.target.value);
+        setGuardarlista(lista);
+        buscar(e.target.value);
+        if (e.target.value===''){
+            setLista(guardarlista);
+        }
     }
     function buscar(terminobusqueda) {
-        var resultadoBusqueda
+        if(terminobusqueda!==''){
+
+            let resultadoBusqueda=tablausuario.filter(elemento=>{
+                if(elemento.name.toString().toLowerCase().includes(terminobusqueda.toLowerCase())){
+                    return elemento;
+                }
+            });
+            setLista(resultadoBusqueda);
+        }else{
+            setLista(guardarlista);
+            console.log('aqui esta jorge');
+        }
+
 
     }
+    //hatsa aqui lo que hayq eu arreglar
     return(
         <div className='container border'>
-            <Navbar hadleonselect={hadleonselect} input={input} buscar={buscar}/>
+            <Navbar hadleonselect={hadleonselect} input={input}/>
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
