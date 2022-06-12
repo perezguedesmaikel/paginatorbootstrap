@@ -1,14 +1,32 @@
 import React,{useState,useEffect} from "react";
 import Contador from "./Contador";
 import Navbar from "./Navbar";
+import axios from "axios";
 const datos_api=Array.from({length:100},(value,index)=>{
   return{id:index,title:`Item #${index}`,email:'maikel@gmail.com'}
 });
 let numitem=10;
 
 function Paginator() {
-    const [totaldatos,setTotaldatos]=useState(datos_api);
-    const [lista,setLista]=useState([...totaldatos].splice(0,numitem));
+    const[totaldatos,setTotaldatos]=useState([]);
+    const [lista,setLista]=useState([]);
+    const[tablausuario,setTablausuario]=useState([]);
+    const[busqueda,setBusqueda]=useState('');
+    const peticionget= async ()=>{
+        await axios.get('https://jsonplaceholder.typicode.com/users').then(response=>{
+            setTotaldatos(response.data);
+            setLista([...totaldatos].splice(0,numitem));
+        }).catch(error=>{
+            console.log(error);
+        });
+    }
+    useEffect(()=>{
+        peticionget().then();
+    },[totaldatos]);
+    useEffect(()=>{
+        setLista([...totaldatos].splice(0,numitem));
+    },[]);
+    //const [totaldatos,setTotaldatos]=useState(datos_api);
     const [prevdesabilitado,setPrevdesabilitado]=useState(true);
     const [nextdesabilitado,setNextdesabilitado]=useState(false);
     const [currentpage,setCurrentpage]=useState(0);
@@ -83,11 +101,13 @@ function Paginator() {
                </tr>
                </thead>
                     <tbody>
-                    {lista.map(item=><tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.email}</td>
-                        <td>{item.title}</td>
-                    </tr>)}
+                    {
+                        lista.map(item=><tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>{item.email}</td>
+                            <td>{item.name}</td>
+                        </tr>)
+                    }
                     </tbody>
                 <tfoot className='table table-primary fw-bold'>
                 <tr>
