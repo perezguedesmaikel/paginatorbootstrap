@@ -23,13 +23,16 @@ function Paginator() {
             console.log(error);
         });
     }
-    useEffect(()=>{
-        peticionget().then();
 
-    },[]);
     useEffect(()=>{
+
         setLista([...totaldatos].splice(0,numitem));
     },[totaldatos]);
+    useEffect(()=>{
+        if(totalpageint===1){
+            setNextdesabilitado(true);
+        }
+    },[lista]);
     //const [totaldatos,setTotaldatos]=useState(datos_api);
 
 
@@ -44,7 +47,11 @@ function Paginator() {
     let arreglototalpaginas=Array.from({length:totalpageint-1},(value,index)=>{
         return{id:index}
     });
+    useEffect(()=>{
 
+        peticionget().then();
+
+    },[]);
     function hadleonselect(e) {
         numitem=parseInt(e.target.value);
       //console.log(parseInt(e.target.value));
@@ -93,9 +100,16 @@ function Paginator() {
             setNextdesabilitado(false)
         }
     }
+    function input(e) {
+        setBusqueda(e.target.value);
+    }
+    function buscar(terminobusqueda) {
+        var resultadoBusqueda
+
+    }
     return(
         <div className='container border'>
-            <Navbar hadleonselect={hadleonselect}/>
+            <Navbar hadleonselect={hadleonselect} input={input} buscar={buscar}/>
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
