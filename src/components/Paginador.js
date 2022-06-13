@@ -119,14 +119,13 @@ function Paginator() {
             setLista(resultadoBusqueda);
         }else{
             setLista(guardarlista);
-            console.log('aqui esta jorge');
         }
 
 
     }
     return(
         <div className='container border'>
-            <Navbar hadleonselect={hadleonselect} input={input}/>
+            <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos}/>
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
