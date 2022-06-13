@@ -101,13 +101,11 @@ function Paginator() {
             setNextdesabilitado(false)
         }
     }
-    //arreglar este codigo
+
     function input(e) {
-        //setBusqueda(e.target.value);
-        setGuardarlista(lista);
         buscar(e.target.value);
         if (e.target.value===''){
-            setLista(guardarlista);
+            setLista([...totaldatos].splice(0,numitem));
         }
     }
     function buscar(terminobusqueda) {
@@ -126,7 +124,6 @@ function Paginator() {
 
 
     }
-    //hatsa aqui lo que hayq eu arreglar
     return(
         <div className='container border'>
             <Navbar hadleonselect={hadleonselect} input={input}/>
