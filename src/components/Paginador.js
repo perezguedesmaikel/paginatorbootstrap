@@ -16,6 +16,9 @@ function Paginator() {
     const [nextdesabilitado,setNextdesabilitado]=useState(false);
     const [prevdesabilitado,setPrevdesabilitado]=useState(true);
     const [currentpage,setCurrentpage]=useState(0);
+    const [formEnvioSucces,setFormEnvioSucces]=useState(false);
+    const [imput1,setImput1]=useState('');
+    const [imput2,setImput2]=useState('');
     const peticionget= async ()=>{
         await axios.get('http://localhost:9000/api').then(response=>{
             setTotaldatos(response.data);
@@ -122,12 +125,23 @@ function Paginator() {
             setLista(guardarlista);
         }
 
-
+    }
+    function handleSubmitmia(valor){
+        setFormEnvioSucces(true);
+        valor.id=totaldatos.length+1;
+        setTotaldatos([...totaldatos,valor]);
+        //console.log(valor);
+    }
+   function imput21() {
+      console.log('imput1');
+   }
+    function imput22() {
+        console.log('imput1');
     }
     return(
         <div className='container border'>
-
-            <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos}/>
+            <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos} handleSubmitmia={handleSubmitmia}
+                    formEnviosucces={formEnvioSucces} imput1={imput21} imput2={imput22}/>
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
@@ -138,7 +152,6 @@ function Paginator() {
                </thead>
                     <tbody>
                     {
-
                         lista.length>0?lista.map(item=><tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.email}</td>
