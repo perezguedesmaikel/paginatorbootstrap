@@ -1,7 +1,7 @@
 import React,{Fragment} from "react";
 import { useForm } from "react-hook-form";
 
-function Form({handleSubmitmia,formEnviosucces,imput1,imput2}) {
+function Form({handleSubmitmia,formEnviosucces,imput1,imput2,imput11,imput22}) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         handleSubmitmia(data);
@@ -24,10 +24,10 @@ function Form({handleSubmitmia,formEnviosucces,imput1,imput2}) {
                     </hr>
                     <a className="navbar-brand form-label" href="#">Envio de datos:</a>
                     <form className="d-flex" onSubmit={handleSubmit(onSubmit)}>
-                        <input className="form-control me-2" type="email" placeholder="email" aria-label="email"
+                        <input value={imput11} className="form-control me-2" type="email" placeholder="email" aria-label="email"
                                {...register("email", { required: true })} onChange={imput1}
                         />
-                        <input className="form-control me-2" type="text" placeholder="name" aria-label="text"
+                        <input value={imput22} className="form-control me-2" type="text" placeholder="name" aria-label="text"
                                {...register("name", { required: true })} onChange={imput2}
                         />
                         <button className="btn btn-primary" type="submit" >Enviar</button>

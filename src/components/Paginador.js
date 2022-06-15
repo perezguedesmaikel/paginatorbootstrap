@@ -127,21 +127,23 @@ function Paginator() {
 
     }
     function handleSubmitmia(valor){
+        setImput1('');
+        setImput2('');
         setFormEnvioSucces(true);
         valor.id=totaldatos.length+1;
         setTotaldatos([...totaldatos,valor]);
         //console.log(valor);
     }
-   function imput21() {
-      console.log('imput1');
+   function imput21(e) {
+        setImput1(e.target.value);
    }
-    function imput22() {
-        console.log('imput1');
+    function imput22(e) {
+        setImput2(e.target.value);
     }
     return(
         <div className='container border'>
             <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos} handleSubmitmia={handleSubmitmia}
-                    formEnviosucces={formEnvioSucces} imput1={imput21} imput2={imput22}/>
+                    formEnviosucces={formEnvioSucces} imput1={imput21} imput2={imput22} imput11={imput1} imput22={imput2}/>
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
