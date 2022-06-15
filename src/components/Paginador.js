@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import Contador from "./Contador";
 import Navbar from "./Navbar";
 import axios from "axios";
+import Form from "./Form";
 const datos_api=Array.from({length:100},(value,index)=>{
   return{id:index,title:`Item #${index}`,email:'maikel@gmail.com'}
 });
@@ -16,7 +17,7 @@ function Paginator() {
     const [prevdesabilitado,setPrevdesabilitado]=useState(true);
     const [currentpage,setCurrentpage]=useState(0);
     const peticionget= async ()=>{
-        await axios.get('https://jsonplaceholder.typicode.com/users').then(response=>{
+        await axios.get('http://localhost:9000/api').then(response=>{
             setTotaldatos(response.data);
             setTablausuario(response.data);
 
@@ -43,7 +44,7 @@ function Paginator() {
         totalpageint=totalpage;
     }else
     {
-        totalpageint=totalpage.toFixed();
+        totalpageint=parseInt(totalpage.toFixed())+1;
     }
     let arreglototalpaginas=Array.from({length:totalpageint-1},(value,index)=>{
         return{id:index}
@@ -125,6 +126,7 @@ function Paginator() {
     }
     return(
         <div className='container border'>
+
             <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos}/>
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
