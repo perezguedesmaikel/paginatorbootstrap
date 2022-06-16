@@ -2,11 +2,13 @@ import React,{Fragment} from "react";
 import Form from "./Form";
 import { BsFillBinocularsFill} from "react-icons/bs";
 
-function Navbar({hadleonselect,input,totaldatos,handleSubmitmia,formEnviosucces, imput1, imput2,imput11,imput22}) {
+function Navbar({hadleonselect,input,totaldatos,handleSubmitmia,formEnviosucces, imput1, imput2,imput11,clicbotonform,
+                    imput22}) {
     return(
         <Fragment>
             {/*Formulario navbar----------------------------------------------Formulario navbar*/}
-           <Form handleSubmitmia={handleSubmitmia} formEnviosucces={formEnviosucces} imput1={imput1} imput2={imput2} imput11={imput11} imput22={imput22}/>
+           <Form handleSubmitmia={handleSubmitmia} formEnviosucces={formEnviosucces} imput1={imput1} imput2={imput2}
+                 imput11={imput11} imput22={imput22} clicbotonform={clicbotonform}/>
             {/*Formulario navbar----------------------------------------------Formulario navbar*/}
         <nav className="navbar navbar-expand-lg navbar-light bg-light bg-body">
             <div className="container-fluid">

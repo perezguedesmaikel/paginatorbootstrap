@@ -124,7 +124,6 @@ function Paginator() {
         }else{
             setLista(guardarlista);
         }
-
     }
     function handleSubmitmia(valor){
         setImput1('');
@@ -133,17 +132,35 @@ function Paginator() {
         valor.id=totaldatos.length+1;
         setTotaldatos([...totaldatos,valor]);
         //console.log(valor);
+        axios({
+            method  : 'post',
+            url : 'http://localhost:9000/api',
+            data : valor,
+        })
+            .then((res)=>{
+                console.log(res);
+            })
+            .catch((err) => {throw err});
+        setTimeout(()=>setFormEnvioSucces(false), 3000)
     }
+
    function imput21(e) {
         setImput1(e.target.value);
+        setFormEnvioSucces(false);
    }
     function imput22(e) {
         setImput2(e.target.value);
+        setFormEnvioSucces(false);
+    }
+    function clicbotonform() {
+        setFormEnvioSucces(false);
     }
     return(
         <div className='container border'>
             <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos} handleSubmitmia={handleSubmitmia}
-                    formEnviosucces={formEnvioSucces} imput1={imput21} imput2={imput22} imput11={imput1} imput22={imput2}/>
+                    formEnviosucces={formEnvioSucces} imput1={imput21} imput2={imput22} imput11={imput1} imput22={imput2}
+                    clicbotonform={clicbotonform}
+            />
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
                <thead className='table-primary'>
                <tr>
