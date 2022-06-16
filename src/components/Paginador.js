@@ -68,6 +68,7 @@ function Paginator() {
         setCurrentpage(0);
         setPrevdesabilitado(true);
         setNextdesabilitado(false);
+
     }
     function Next() {
         const totalelementos=totaldatos.length;
@@ -115,8 +116,10 @@ function Paginator() {
         if (e.target.value===''){
             setLista([...totaldatos].splice(0,numitem));
         }
+
     }
     function buscar(terminobusqueda) {
+
         if(terminobusqueda!==''){
 
             let resultadoBusqueda=tablausuario.filter(elemento=>{
@@ -180,7 +183,7 @@ function Paginator() {
                             <td>{item.id}</td>
                             <td>{item.email}</td>
                             <td>{item.name}</td>
-                        </tr>):<tr><td>Cargando datos...</td></tr>
+                        </tr>):<tr><td>No hay datos para mostrar verifique su API o su filtro...</td></tr>
                     }
                     </tbody>
                 <tfoot className='table table-primary fw-bold'>
