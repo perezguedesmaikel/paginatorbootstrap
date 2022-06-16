@@ -42,12 +42,16 @@ function Paginator() {
 
 
     let totalpage=totaldatos.length/numitem;
-    let totalpageint=0;
-    if (Number.isInteger(totalpage)){
+    let totalpageint=1;
+    if (totalpage % 1===0){
         totalpageint=totalpage;
     }else
     {
         totalpageint=parseInt(totalpage.toFixed())+1;
+        if(totalpageint-totalpage>1){
+            totalpageint=totalpageint-1;
+        }
+
     }
     let arreglototalpaginas=Array.from({length:totalpageint-1},(value,index)=>{
         return{id:index}
@@ -129,8 +133,9 @@ function Paginator() {
         setImput1('');
         setImput2('');
         setFormEnvioSucces(true);
-        valor.id=totaldatos.length+1;
+        valor.id=totaldatos.length+2;
         setTotaldatos([...totaldatos,valor]);
+
         //console.log(valor);
         axios({
             method  : 'post',
@@ -141,7 +146,7 @@ function Paginator() {
                 console.log(res);
             })
             .catch((err) => {throw err});
-        setTimeout(()=>setFormEnvioSucces(false), 3000)
+        setTimeout(()=>setFormEnvioSucces(false), 3000);
     }
 
    function imput21(e) {
