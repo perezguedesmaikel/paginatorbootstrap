@@ -9,7 +9,7 @@ function Form({handleSubmitmia,formEnviosucces,imput1,imput2,imput11,imput22,cli
     };
     return(
         <Fragment>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" >
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">Formulario</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" onClick={clicbotonform}

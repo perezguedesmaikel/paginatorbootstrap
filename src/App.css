@@ -12,6 +12,13 @@
 .mensajeoculto{
   display: none;
 }
+.cursorpointer{
+  cursor: pointer;
+}
+.mod-busqueda{
+  display: none!important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -19,6 +26,9 @@
 }
 @media (max-width: 600px) {
   .ocultocel {
+    display: none;
+  }
+  .desaparecercel{
     display: none;
   }
 }

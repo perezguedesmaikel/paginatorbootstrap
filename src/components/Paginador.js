@@ -2,7 +2,10 @@ import React,{useState,useEffect} from "react";
 import Contador from "./Contador";
 import Navbar from "./Navbar";
 import axios from "axios";
-import Form from "./Form";
+import ContadorBusqueda from "./ContadorBusqueda";
+import { AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import Modal from "./modal";
 const datos_api=Array.from({length:100},(value,index)=>{
   return{id:index,title:`Item #${index}`,email:'maikel@gmail.com'}
 });
@@ -14,7 +17,9 @@ function Paginator() {
     const[tablausuario,setTablausuario]=useState([]);
     const[guardarlista,setGuardarlista]=useState([]);
     const [nextdesabilitado,setNextdesabilitado]=useState(false);
+    const [modobusqueda,setModobusqueda]=useState(false);
     const [prevdesabilitado,setPrevdesabilitado]=useState(true);
+    const [resultBusqueda,setResultBusqueda]=useState(0);
     const [currentpage,setCurrentpage]=useState(0);
     const [formEnvioSucces,setFormEnvioSucces]=useState(false);
     const [imput1,setImput1]=useState('');
@@ -121,15 +126,18 @@ function Paginator() {
     function buscar(terminobusqueda) {
 
         if(terminobusqueda!==''){
-
+            setModobusqueda(true);
             let resultadoBusqueda=tablausuario.filter(elemento=>{
                 if(elemento.name.toString().toLowerCase().includes(terminobusqueda.toLowerCase())){
                     return elemento;
                 }
             });
             setLista(resultadoBusqueda);
+            setResultBusqueda(resultadoBusqueda.length);
         }else{
+            setModobusqueda(false);
             setLista(guardarlista);
+
         }
     }
     function handleSubmitmia(valor){
@@ -163,6 +171,24 @@ function Paginator() {
     function clicbotonform() {
         setFormEnvioSucces(false);
     }
+    function editar(val) {
+        console.log(val);
+
+    }
+    function eliminar(val) {
+        const filtrar=totaldatos.filter(dato=> (dato.id !==val)
+        );
+        setTotaldatos(filtrar);
+        axios({
+            method  : 'delete',
+            url : `http://localhost:9000/api/${val}`,
+        })
+            .then((res)=>{
+                console.log(res);
+            })
+            .catch((err) => {throw err});
+    }
+
     return(
         <div className='container border'>
             <Navbar hadleonselect={hadleonselect} input={input} totaldatos={totaldatos} handleSubmitmia={handleSubmitmia}
@@ -170,35 +196,42 @@ function Paginator() {
                     clicbotonform={clicbotonform}
             />
             <table className="table table table-striped table-bordered mb-1 mt-1 table-hover table-responsive-sm">
-               <thead className='table-primary'>
+               <thead className='table-primary table-responsive-sm'>
                <tr>
-                   <th>id</th>
-                   <th>Email</th>
-                   <th>Title</th>
+                   <th className='col-1'>id</th>
+                   <th className='col-5 desaparecercel'>Email</th>
+                   <th className='col-5'>Title</th>
+                   <th className='col-1'>Edición</th>
+
                </tr>
                </thead>
                     <tbody>
                     {
                         lista.length>0?lista.map(item=><tr key={item.id}>
                             <td>{item.id}</td>
-                            <td>{item.email}</td>
-                            <td>{item.name}</td>
-                        </tr>):<tr><td>No hay datos para mostrar verifique su API o su filtro...</td></tr>
+                            <td className='desaparecercel'>{item.email}</td>
+                            <td>{item.name} </td>
+                            <td><AiFillEdit className='text-primary cursorpointer' onClick={()=>editar(item)}
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop"/> |
+                                <AiFillDelete className='text-danger cursorpointer' onClick={()=>eliminar(item.id)}/> </td>
+                        </tr>):<tr><td> </td><td> </td><td>No hay datos para mostrar verifique su API o su filtro...</td><td> </td></tr>
                     }
                     </tbody>
-                <tfoot className='table table-primary fw-bold'>
+                <tfoot className='table table-primary fw-bold table-responsive-sm'>
                 <tr>
                     <td>{totaldatos.length}</td>
-                    <td>Email</td>
+                    <td className='desaparecercel'>Email</td>
                     <td>Title</td>
+                    <td>Edición</td>
                 </tr>
                 </tfoot>
             </table>
            <Contador total={totalpageint} Next={Next} Previous={Previous} botondesabilitado={prevdesabilitado}
                      nextdesabilitado={nextdesabilitado} arreglototalpaginas={arreglototalpaginas} currentpage={currentpage}
-           handlingancla={handlingancla}
+           handlingancla={handlingancla} modobusqueda={modobusqueda}
            />
-
+           <ContadorBusqueda resultBusqueda={resultBusqueda} modobusqueda={modobusqueda}/>
+           <Modal/>
         </div>
 
 

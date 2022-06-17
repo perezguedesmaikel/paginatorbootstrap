@@ -1,9 +1,8 @@
 import React from "react";
 
-function Contador({total,Next,Previous,botondesabilitado,nextdesabilitado,arreglototalpaginas,currentpage,handlingancla}) {
-
+function Contador({total,Next,Previous,botondesabilitado,nextdesabilitado,arreglototalpaginas,currentpage,handlingancla,modobusqueda}) {
     return(
-        <nav aria-label="..." className='d-flex'>
+        <nav aria-label="..." className={`d-flex ${modobusqueda?'mod-busqueda':''}`}>
             <label className='pt-2 me-2 '>Página {parseInt(currentpage)+1} de {total}</label>
             <ul className="pagination justify-content-end">
                 <li className={`page-item ${botondesabilitado?'disabled':''}`}>
