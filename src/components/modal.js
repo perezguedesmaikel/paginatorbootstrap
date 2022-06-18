@@ -1,7 +1,7 @@
 import React,{Fragment} from "react";
 import { AiFillEdit } from "react-icons/ai";
 
-function Modal() {
+function Modal({inputedicion,inputedicion1,actualizar,handlingonchange,handlingonchange1}) {
     return(
         <Fragment>
     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -16,20 +16,20 @@ function Modal() {
                     <form>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Correo Electrónico</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" placeholder={'Teclee nuevo correo'}/>
+                            <input defaultValue={inputedicion} type="email" className="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder={'Teclee nuevo correo'} onChange={handlingonchange}/>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputPassword1" className="form-label">Nombre</label>
-                            <input type="text" className="form-control" id="exampleInputPassword1"
-                                   placeholder={'Teclee nuevo nombre'}/>
+                            <input defaultValue={inputedicion1} type="text" className="form-control" id="exampleInputPassword1"
+                                   placeholder={'Teclee nuevo nombre'} onChange={handlingonchange1}/>
                         </div>
                     </form>
                     {/*formulario------------------------------------------------------------formulario*/}
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" className="btn btn-primary">Actualizar</button>
+                    <button type="button" onClick={actualizar} className="btn btn-primary" data-bs-dismiss="modal">Actualizar</button>
                 </div>
             </div>
         </div>

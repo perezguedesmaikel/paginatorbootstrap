@@ -24,6 +24,9 @@ function Paginator() {
     const [formEnvioSucces,setFormEnvioSucces]=useState(false);
     const [imput1,setImput1]=useState('');
     const [imput2,setImput2]=useState('');
+    const [inputedicion,setInputedicion]=useState('');
+    const [inputedicion1,setInputedicion1]=useState('');
+    const [tarea,setTarea]=useState([]);
     const peticionget= async ()=>{
         await axios.get('http://localhost:9000/api').then(response=>{
             setTotaldatos(response.data);
@@ -172,8 +175,8 @@ function Paginator() {
         setFormEnvioSucces(false);
     }
     function editar(val) {
-        console.log(val);
-
+        setInputedicion(val.email);
+        setInputedicion1(val.name);
     }
     function eliminar(val) {
         const filtrar=totaldatos.filter(dato=> (dato.id !==val)
@@ -187,6 +190,17 @@ function Paginator() {
                 console.log(res);
             })
             .catch((err) => {throw err});
+    }
+    function actualizar() {
+        const condicion=totaldatos.map(dato=>(dato.id===tarea.id?tarea:dato));
+                setTotaldatos(condicion);
+    }
+    function handlingonchange(e){
+       setInputedicion(e.target.value);
+
+    }
+    function handlingonchange1(e){
+        setInputedicion(e.target.value);
     }
 
     return(
@@ -231,7 +245,8 @@ function Paginator() {
            handlingancla={handlingancla} modobusqueda={modobusqueda}
            />
            <ContadorBusqueda resultBusqueda={resultBusqueda} modobusqueda={modobusqueda}/>
-           <Modal/>
+           <Modal inputedicion={inputedicion} inputedicion1={inputedicion1} actualizar={actualizar}
+                  handlingonchange={handlingonchange} handlingonchange1={handlingonchange1}/>
         </div>
 
 
