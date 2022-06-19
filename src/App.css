@@ -12,13 +12,24 @@
 .mensajeoculto{
   display: none;
 }
+.submitoculto{
+  display: none;
+}
 .cursorpointer{
   cursor: pointer;
 }
 .mod-busqueda{
   display: none!important;
 }
-
+#area1submit{
+  display: none;
+}
+#area2submit{
+  display: none;
+}
+#area3submit{
+  display: none;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -27,6 +27,7 @@ function Paginator() {
     const [currentUser,setCurrentUser]=useState({});
     const [inputchange1,setInputchange1]=useState('');
     const [inputchange2,setInputchange2]=useState('');
+    const [estadosubmit,setEstadosubmit]=useState(false);
     const [tarea,setTarea]=useState([]);
     const peticionget= async ()=>{
         await axios.get('http://localhost:9000/api').then(response=>{
@@ -176,6 +177,7 @@ function Paginator() {
         setFormEnvioSucces(false);
     }
     function editar(val) {
+        setEstadosubmit(false);
        setCurrentUser(val);
 
     }
@@ -193,9 +195,18 @@ function Paginator() {
             .catch((err) => {throw err});
     }
     function actualizar(tarea) {
-       console.log(tarea);
-        const condicion=totaldatos.map(dato=>(dato.id===tarea.id?tarea:dato));
+        setEstadosubmit(true);
+        const condicion=totaldatos.map(datos=>(datos.id===tarea.id?tarea:datos));
                 setTotaldatos(condicion);
+        axios({
+            method  : 'put',
+            url : `http://localhost:9000/api/${tarea.id}`,
+            data:tarea,
+        })
+            .then((res)=>{
+                console.log(res);
+            })
+            .catch((err) => {throw err});
     }
 
     return(
@@ -241,7 +252,7 @@ function Paginator() {
            />
            <ContadorBusqueda resultBusqueda={resultBusqueda} modobusqueda={modobusqueda}/>
            <Modal  actualizar={actualizar}
-                  currentuser={currentUser}/>
+                  currentuser={currentUser} estadosubmit={estadosubmit}/>
         </div>
 
 
