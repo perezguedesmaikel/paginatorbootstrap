@@ -21,13 +21,7 @@
 .mod-busqueda{
   display: none!important;
 }
-#area1submit{
-  display: none;
-}
-#area2submit{
-  display: none;
-}
-#area3submit{
+.areasubmit{
   display: none;
 }
 @media (prefers-reduced-motion: no-preference) {

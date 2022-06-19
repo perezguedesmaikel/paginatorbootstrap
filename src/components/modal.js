@@ -31,7 +31,7 @@ function Modal({actualizar,currentuser,estadosubmit}) {
                 <div className="modal-body">
                     {/*formulario------------------------------------------------------------formulario*/}
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="mb-3" id={estadosubmit?'area1submit':''}>
+                        <div className={`mb-3 ${estadosubmit?'areasubmit':''}`}>
                             <label htmlFor="exampleInputEmail1" className="form-label">Correo Electrónico</label>
                             <input  type="email" className="form-control"
                                    aria-describedby="emailHelp" placeholder={'Teclee nuevo correo'}
@@ -41,7 +41,7 @@ function Modal({actualizar,currentuser,estadosubmit}) {
                                 Este campo es para editar, no puede quedar vasio!!
                             </div>}
                         </div>
-                        <div className="mb-3" id={estadosubmit?'area2submit':''}>
+                        <div className={`mb-3 ${estadosubmit?'areasubmit':''}`} id={estadosubmit?'area2submit':''}>
                             <label htmlFor="exampleInputPassword1" className="form-label">Nombre</label>
                             <input  type="text" className="form-control"
                                    placeholder={'Teclee nuevo nombre'}
@@ -51,7 +51,7 @@ function Modal({actualizar,currentuser,estadosubmit}) {
                                 Este camapo es para editar, no puede quedar vasio!
                             </div>}
                         </div>
-                        <div className="alert alert-success" id={estadosubmit?'':'area3submit'} role="alert">
+                        <div className={`alert alert-success ${estadosubmit?'':'areasubmit'}`}  role="alert">
                             Los datos se actualizaron perfectamente!!!
                         </div>
                         <div className="modal-footer">

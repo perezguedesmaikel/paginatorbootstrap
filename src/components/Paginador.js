@@ -125,6 +125,7 @@ function Paginator() {
         buscar(e.target.value);
         if (e.target.value===''){
             setLista([...totaldatos].splice(0,numitem));
+            setCurrentpage(0);
         }
 
     }
@@ -146,12 +147,12 @@ function Paginator() {
         }
     }
     function handleSubmitmia(valor){
+        setCurrentpage(0);
         setImput1('');
         setImput2('');
         setFormEnvioSucces(true);
-        valor.id=totaldatos.length+2;
+        valor.id=totaldatos[totaldatos.length-1].id+1;
         setTotaldatos([...totaldatos,valor]);
-
         //console.log(valor);
         axios({
             method  : 'post',
@@ -182,6 +183,7 @@ function Paginator() {
 
     }
     function eliminar(val) {
+        setCurrentpage(0);
         const filtrar=totaldatos.filter(dato=> (dato.id !==val)
         );
         setTotaldatos(filtrar);
@@ -195,6 +197,7 @@ function Paginator() {
             .catch((err) => {throw err});
     }
     function actualizar(tarea) {
+        setCurrentpage(0);
         setEstadosubmit(true);
         const condicion=totaldatos.map(datos=>(datos.id===tarea.id?tarea:datos));
                 setTotaldatos(condicion);
